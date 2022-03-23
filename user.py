@@ -1,5 +1,3 @@
-from ipaddress import ip_address
-from xml.etree.ElementInclude import default_loader
 from __init__ import db
 from models import Users
 
@@ -25,6 +23,7 @@ def getQtt(ip):
 
 
 def recieveData(ip, data):
+    print(data['money'])
     user = Users.query.filter_by(ip_address=ip).first()
     if user:
         qt = int(data['money'])
@@ -48,15 +47,15 @@ def validate(ip, val):
         col = 0 # red = 0
     elif val % 2 == 1:
         col = 1 # black = 1
-    if os.path.exists("data/" + ip + ".json"):
-        with open('data/' + ip + '.json') as file:
+    if os.path.exists("./data/" + ip + ".json"):
+        with open('./data/' + ip + '.json') as file:
             data = json.load(file)
-            return data['money'] + data['numbers'][val] * 36 + data['colors'][col] * 2
+            return int(data['money']) + int(data['numbers'][val]) * 36 + int(data['colors'][col]) * 2
 
 def validateAllUsers(val):
     for user in Users.query:
         user.val = validate(user.ip_address, val)
         db.session.commit()
-    folder = '/data'
+    folder = './data/'
     for filename in os.listdir(folder):
-        os.remove(filename)
+        os.remove(folder + filename)

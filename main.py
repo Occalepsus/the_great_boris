@@ -22,20 +22,30 @@ def recieve():
     return ''
 
 
-@main.route('/vancauwenberghe')
+@main.route('/vancauwenberghe', methods=['GET',"POST"])
 def vancauwenberghe():
     return render_template("admin.html")
 
 
 @main.route('/vancauwenberghe_send', methods=['POST'])
 def vancauwenberghe_send():
-    user.validateAllUsers(request.get_json(force=True)["val"])
+    user.validateAllUsers(int(request.get_json()["val"]))
     return render_template("admin.html")
 
 
 @main.route('/js/<name>.js')
 def sendScript(name):
     return send_from_directory("./scripts", name + ".js")
+
+
+@main.route('/styles/<name>.css')
+def sendStyle(name):
+    return send_from_directory("./resources", name + ".css")
+
+@main.route('/resources/<name>')
+def sendResource(name):
+    return send_from_directory("./resources/", name)
+
 
 if __name__ == '__main__':
     db.create_all(app=app)

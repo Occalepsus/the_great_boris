@@ -27,6 +27,8 @@ $(document).ready(function (e) {
                 alert(msg);
             }
         })
+
+        alert("La mise a bien été envoyée !")
     })
 });
 

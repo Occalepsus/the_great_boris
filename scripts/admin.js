@@ -4,14 +4,17 @@ $(document).ready(function (e) {
 
 console.log($('input.send').val())
 
+        val = $("input.send").val()
+        console.log(val)
+
         $.ajax({
             url: '/vancauwenberghe_send',
             type: 'POST',
-            data: {"val": $("input.send").val()},
+            data: JSON.stringify({"val": val}),
             contentType: 'application/json',
             async: false,
             success: function (msg) {
-                alert(msg);
+                alert("La mise a bien été envoyée au serveur !");
             }
         })
     })
