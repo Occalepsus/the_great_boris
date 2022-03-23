@@ -40,7 +40,7 @@ def sendScript(name):
 
 @main.route('/styles/<name>.css')
 def sendStyle(name):
-    return send_from_directory("./resources", name + ".css")
+    return send_from_directory("./styles", name + ".css")
 
 @main.route('/resources/<name>')
 def sendResource(name):
