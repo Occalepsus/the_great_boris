@@ -16,13 +16,6 @@ def create_app():
     
     from models import Users
 
-
-    # from auth import auth as auth_blueprint
-    # app.register_blueprint(auth_blueprint)
-
-    # from profile import player_profile as prof_blueprint
-    # app.register_blueprint(prof_blueprint)
-
     from main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
